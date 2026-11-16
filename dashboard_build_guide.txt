@@ -1,0 +1,29 @@
+# Dashboard build guide
+
+## Page 1: Sales Overview
+Canvas: 16:9 widescreen.
+Top row: four Card visuals for Total Sales, Total Profit, Total Orders, Profit Margin.
+Middle left: Line chart with Calendar[Month] on X-axis and [Total Sales] on Y-axis.
+Middle right: Clustered bar chart with Sales[Category] and [Total Sales].
+Bottom left: Clustered bar chart with Sales[Region] and [Total Sales].
+Bottom right: Table with Product, Total Sales, Total Profit.
+Add slicers for Calendar[Year], Sales[Region], Sales[Category].
+
+## Page 2: Product Analysis
+Bar chart: Product by Total Sales (sort descending).
+Matrix: Category > Product with Total Sales and Total Profit.
+Use conditional formatting on Profit.
+Add a tooltip or drill-through page if you want an extra feature.
+
+## Calendar table DAX
+Calendar =
+ADDCOLUMNS(
+    CALENDAR(MIN(Sales[Order_Date]), MAX(Sales[Order_Date])),
+    "Year", YEAR([Date]),
+    "Month Number", MONTH([Date]),
+    "Month", FORMAT([Date], "MMM"),
+    "Year-Month", FORMAT([Date], "YYYY-MM")
+)
+
+Sort Calendar[Month] by Calendar[Month Number].
+Create relationship Calendar[Date] (one) -> Sales[Order_Date] (many).

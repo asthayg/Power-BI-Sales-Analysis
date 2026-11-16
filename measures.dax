@@ -1,0 +1,17 @@
+Total Sales = SUM(Sales[Sales])
+
+Total Profit = SUM(Sales[Profit])
+
+Total Orders = DISTINCTCOUNT(Sales[Order_ID])
+
+Total Quantity = SUM(Sales[Quantity])
+
+Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)
+
+Average Order Value = DIVIDE([Total Sales], [Total Orders], 0)
+
+Sales Previous Month =
+CALCULATE([Total Sales], DATEADD('Calendar'[Date], -1, MONTH))
+
+Sales MoM Change % =
+DIVIDE([Total Sales] - [Sales Previous Month], [Sales Previous Month], 0)
